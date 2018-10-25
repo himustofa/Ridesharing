@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/settings_id"
+            android:title="@string/settings_title"
+            android:icon="@drawable/ic_settings_black_24dp" />
+        <item
+            android:id="@+id/profile_id"
+            android:title="@string/profile_title"
+            android:icon="@drawable/ic_people_black_24dp" />
+        <item
+            android:id="@+id/notice_id"
+            android:title="@string/notification_title"
+            android:icon="@drawable/ic_add_alert_black_24dp" />
+        <item
+            android:id="@+id/about_id"
+            android:title="@string/about_title"
+            android:icon="@drawable/ic_info_outline_black_24dp" />
+        <item
+            android:id="@+id/log_out"
+            android:title="@string/log_out_title"
+            android:icon="@drawable/ic_exit_to_app_black_24dp" />
+    </group>
+
+</menu>

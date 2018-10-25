@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">Ridesharing</string>
+    <string name="nav_open">Open</string>
+    <string name="nav_close">Close</string>
+
+    <string name="title_activity_maps">Map</string>
+    <!-- Toolbar/ActionBar Title -->
+    <string name="home_title">Home</string>
+    <string name="settings_title">Settings</string>
+    <string name="notification_title">Notification</string>
+    <string name="profile_title">My Profile</string>
+    <string name="about_title">About</string>
+    <string name="log_out_title">Log Out</string>
+    <string name="developed_by">Developed by Kamal</string>
+    <string name="apps_details">
+        TO-LET
+        \nApps Version: 1.0
+        \nDeveloped by Mustofa Kamal
+    </string>
+</resources>
