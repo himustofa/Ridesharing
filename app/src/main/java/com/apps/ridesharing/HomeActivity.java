@@ -409,7 +409,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         options.position(new LatLng(latitude,longitude));
         options.draggable(true);
         options.title(locality);
-        options.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
+        options.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
         currentLocationMarker = mMap.addMarker(options);
     }
     public void goToLocation(double latitude, double longitude, int zoom) {
@@ -506,14 +506,14 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             ((TextView) findViewById(R.id.duration_place)).setText(route.duration.text);
             ((TextView) findViewById(R.id.distance_place)).setText(route.distance.text);
 
-            /*originMarkers.add(mMap.addMarker(new MarkerOptions()
-                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
+            originMarkers.add(mMap.addMarker(new MarkerOptions()
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_radio_button_checked_black_24dp))
                     .title(route.startAddress)
                     .position(route.startLocation)));
             destinationMarkers.add(mMap.addMarker(new MarkerOptions()
-                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_radio_button_checked_black_24dp))
                     .title(route.endAddress)
-                    .position(route.endLocation)));*/
+                    .position(route.endLocation)));
 
             PolylineOptions polylineOptions = new PolylineOptions().
                     geodesic(true).
