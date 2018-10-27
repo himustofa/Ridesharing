@@ -11,6 +11,7 @@ import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.internal.NavigationMenuView;
+import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -506,14 +507,14 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             ((TextView) findViewById(R.id.duration_place)).setText(route.duration.text);
             ((TextView) findViewById(R.id.distance_place)).setText(route.distance.text);
 
-            originMarkers.add(mMap.addMarker(new MarkerOptions()
+            /*originMarkers.add(mMap.addMarker(new MarkerOptions()
                     .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_radio_button_checked_black_24dp))
                     .title(route.startAddress)
                     .position(route.startLocation)));
             destinationMarkers.add(mMap.addMarker(new MarkerOptions()
                     .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_radio_button_checked_black_24dp))
                     .title(route.endAddress)
-                    .position(route.endLocation)));
+                    .position(route.endLocation)));*/
 
             PolylineOptions polylineOptions = new PolylineOptions().
                     geodesic(true).
