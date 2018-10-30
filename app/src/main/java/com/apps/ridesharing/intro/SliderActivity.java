@@ -19,6 +19,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.apps.ridesharing.HomeActivity;
+import com.apps.ridesharing.MobileVerifyActivity;
 import com.apps.ridesharing.R;
 
 public class SliderActivity extends AppCompatActivity {
@@ -118,7 +119,7 @@ public class SliderActivity extends AppCompatActivity {
 
     private void launchHomeScreen() {
         prefManager.setFirstTimeLaunch(false);
-        startActivity(new Intent(SliderActivity.this, HomeActivity.class));
+        startActivity(new Intent(SliderActivity.this, MobileVerifyActivity.class));
         finish();
     }
 
