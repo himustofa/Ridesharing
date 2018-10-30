@@ -18,8 +18,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.apps.ridesharing.HomeActivity;
-import com.apps.ridesharing.MobileVerifyActivity;
+import com.apps.ridesharing.user.MobileVerifyActivity;
 import com.apps.ridesharing.R;
 
 public class SliderActivity extends AppCompatActivity {

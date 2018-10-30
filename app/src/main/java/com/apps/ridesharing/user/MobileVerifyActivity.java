@@ -1,4 +1,4 @@
-package com.apps.ridesharing;
+package com.apps.ridesharing.user;
 
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.apps.ridesharing.R;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;

@@ -57,9 +57,9 @@
         <activity
             android:name=".intro.SliderActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".SignUpActivity" />
-        <activity android:name=".SignInActivity" />
-        <activity android:name=".MobileVerifyActivity"
+        <activity android:name=".user.SignUpActivity" />
+        <activity android:name=".user.SignInActivity" />
+        <activity android:name=".user.MobileVerifyActivity"
             android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
