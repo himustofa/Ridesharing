@@ -3,91 +3,49 @@ package com.apps.ridesharing.user;
 public class UserModel {
 
     private String userId;
-    private String userName;
-    private String userRelation;
-    private String userOccupation;
+    private String userMobileNumber;
+    private String userFullName;
     private String userEmail;
-    private String userMobile;
+    private String userBirthDate;
     private String userNid;
-    private String userAddress;
-    private String userImage;
+    private String userGender;
+    private String userImageName;
     private String userImagePath;
-    private String isUserOwner;
+    private String userLatitude;
+    private String userLongitude ;
     private String createdById;
     private String updatedById;
     private String createdAt;
 
-    public UserModel(String userId, String userName, String userRelation, String userOccupation, String userEmail, String userMobile, String userNid, String userAddress, String userImage, String userImagePath, String isUserOwner, String createdById, String updatedById, String createdAt) {
+    public UserModel(String userId, String userMobileNumber, String userFullName, String userEmail, String userBirthDate, String userNid, String userGender, String userImageName, String userImagePath, String userLatitude, String userLongitude, String createdById, String updatedById, String createdAt) {
         this.userId = userId;
-        this.userName = userName;
-        this.userRelation = userRelation;
-        this.userOccupation = userOccupation;
+        this.userMobileNumber = userMobileNumber;
+        this.userFullName = userFullName;
         this.userEmail = userEmail;
-        this.userMobile = userMobile;
+        this.userBirthDate = userBirthDate;
         this.userNid = userNid;
-        this.userAddress = userAddress;
-        this.userImage = userImage;
+        this.userGender = userGender;
+        this.userImageName = userImageName;
         this.userImagePath = userImagePath;
-        this.isUserOwner = isUserOwner;
+        this.userLatitude = userLatitude;
+        this.userLongitude = userLongitude;
         this.createdById = createdById;
         this.updatedById = updatedById;
         this.createdAt = createdAt;
     }
 
-    public UserModel(String userName, String userRelation, String userOccupation, String userEmail, String userMobile, String userNid, String userAddress, String userImage, String userImagePath, String isUserOwner, String createdById, String updatedById, String createdAt) {
-        this.userName = userName;
-        this.userRelation = userRelation;
-        this.userOccupation = userOccupation;
-        this.userEmail = userEmail;
-        this.userMobile = userMobile;
-        this.userNid = userNid;
-        this.userAddress = userAddress;
-        this.userImage = userImage;
-        this.userImagePath = userImagePath;
-        this.isUserOwner = isUserOwner;
-        this.createdById = createdById;
-        this.updatedById = updatedById;
-        this.createdAt = createdAt;
-    }
-
-    public UserModel(String userId, String userName, String userRelation, String userOccupation, String userEmail, String userMobile, String userNid, String userAddress, String userImage, String userImagePath, String isUserOwner) {
+    public UserModel(String userId, String userMobileNumber, String userFullName, String userEmail, String userBirthDate, String userNid, String userGender, String userImageName, String userImagePath, String userLatitude, String userLongitude) {
         this.userId = userId;
-        this.userName = userName;
-        this.userRelation = userRelation;
-        this.userOccupation = userOccupation;
+        this.userMobileNumber = userMobileNumber;
+        this.userFullName = userFullName;
         this.userEmail = userEmail;
-        this.userMobile = userMobile;
+        this.userBirthDate = userBirthDate;
         this.userNid = userNid;
-        this.userAddress = userAddress;
-        this.userImage = userImage;
+        this.userGender = userGender;
+        this.userImageName = userImageName;
         this.userImagePath = userImagePath;
-        this.isUserOwner = isUserOwner;
-    }
-
-    public UserModel(String userName, String userRelation, String userOccupation, String userEmail, String userMobile, String userNid, String userAddress, String userImage, String userImagePath, String isUserOwner) {
-        this.userName = userName;
-        this.userRelation = userRelation;
-        this.userOccupation = userOccupation;
-        this.userEmail = userEmail;
-        this.userMobile = userMobile;
-        this.userNid = userNid;
-        this.userAddress = userAddress;
-        this.userImage = userImage;
-        this.userImagePath = userImagePath;
-        this.isUserOwner = isUserOwner;
-    }
-
-    public UserModel(String userName, String userMobile, String isUserOwner) {
-        this.userName = userName;
-        this.userMobile = userMobile;
-        this.isUserOwner = isUserOwner;
-    }
-
-    public UserModel(String userId, String userName, String userMobile, String isUserOwner) {
-        this.userId = userId;
-        this.userName = userName;
-        this.userMobile = userMobile;
-        this.isUserOwner = isUserOwner;
+        this.userLatitude = userLatitude;
+        this.userLongitude = userLongitude;
     }
 
     public String getUserId() {
@@ -98,28 +56,20 @@ public class UserModel {
         this.userId = userId;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUserMobileNumber() {
+        return userMobileNumber;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUserMobileNumber(String userMobileNumber) {
+        this.userMobileNumber = userMobileNumber;
     }
 
-    public String getUserRelation() {
-        return userRelation;
+    public String getUserFullName() {
+        return userFullName;
     }
 
-    public void setUserRelation(String userRelation) {
-        this.userRelation = userRelation;
-    }
-
-    public String getUserOccupation() {
-        return userOccupation;
-    }
-
-    public void setUserOccupation(String userOccupation) {
-        this.userOccupation = userOccupation;
+    public void setUserFullName(String userFullName) {
+        this.userFullName = userFullName;
     }
 
     public String getUserEmail() {
@@ -130,12 +80,12 @@ public class UserModel {
         this.userEmail = userEmail;
     }
 
-    public String getUserMobile() {
-        return userMobile;
+    public String getUserBirthDate() {
+        return userBirthDate;
     }
 
-    public void setUserMobile(String userMobile) {
-        this.userMobile = userMobile;
+    public void setUserBirthDate(String userBirthDate) {
+        this.userBirthDate = userBirthDate;
     }
 
     public String getUserNid() {
@@ -146,20 +96,20 @@ public class UserModel {
         this.userNid = userNid;
     }
 
-    public String getUserAddress() {
-        return userAddress;
+    public String getUserGender() {
+        return userGender;
     }
 
-    public void setUserAddress(String userAddress) {
-        this.userAddress = userAddress;
+    public void setUserGender(String userGender) {
+        this.userGender = userGender;
     }
 
-    public String getUserImage() {
-        return userImage;
+    public String getUserImageName() {
+        return userImageName;
     }
 
-    public void setUserImage(String userImage) {
-        this.userImage = userImage;
+    public void setUserImageName(String userImageName) {
+        this.userImageName = userImageName;
     }
 
     public String getUserImagePath() {
@@ -170,12 +120,20 @@ public class UserModel {
         this.userImagePath = userImagePath;
     }
 
-    public String getIsUserOwner() {
-        return isUserOwner;
+    public String getUserLatitude() {
+        return userLatitude;
     }
 
-    public void setIsUserOwner(String isUserOwner) {
-        this.isUserOwner = isUserOwner;
+    public void setUserLatitude(String userLatitude) {
+        this.userLatitude = userLatitude;
+    }
+
+    public String getUserLongitude() {
+        return userLongitude;
+    }
+
+    public void setUserLongitude(String userLongitude) {
+        this.userLongitude = userLongitude;
     }
 
     public String getCreatedById() {

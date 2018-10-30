@@ -15,21 +15,22 @@
         android:layout_height="match_parent">
 
         <ImageView
-            android:id="@+id/reg_passport"
+            android:id="@+id/user_passport"
             android:clickable="true"
             android:background="@drawable/image_border"
             android:src="@drawable/ic_mk_logo"
             android:layout_gravity="left"
+            android:layout_marginBottom="10dp"
             android:layout_width="140dp"
             android:layout_height="140dp" />
 
         <!-- Full Name -->
         <android.support.design.widget.TextInputLayout
-            android:id="@+id/layout_reg_full_name"
+            android:id="@+id/layout_user_full_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <EditText
-                android:id="@+id/reg_full_name"
+                android:id="@+id/user_full_name"
                 android:hint="Full Legal Name"
                 android:inputType="textPersonName"
                 android:layout_marginBottom="10dp"
@@ -39,11 +40,11 @@
 
         <!-- Email -->
         <android.support.design.widget.TextInputLayout
-            android:id="@+id/layout_reg_email"
+            android:id="@+id/layout_user_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <EditText
-                android:id="@+id/reg_email"
+                android:id="@+id/user_email"
                 android:hint="E-mail"
                 android:inputType="textWebEmailAddress"
                 android:layout_marginBottom="10dp"
@@ -51,34 +52,64 @@
                 android:layout_height="wrap_content" />
         </android.support.design.widget.TextInputLayout>
 
-        <!-- Phone -->
+        <!-- Birth Date -->
         <android.support.design.widget.TextInputLayout
-            android:id="@+id/layout_reg_mobile_number"
+            android:id="@+id/layout_user_birth_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <EditText
-                android:id="@+id/reg_mobile_number"
-                android:hint="Mobile Number"
-                android:inputType="phone"
-                android:maxLength="11"
+                android:id="@+id/user_birth_date"
+                android:hint="Birth Date"
+                android:inputType="date"
                 android:layout_marginBottom="10dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+
+                android:clickable="true"
+                android:cursorVisible="false"
+                android:focusable="false"
+                android:focusableInTouchMode="false" />
         </android.support.design.widget.TextInputLayout>
 
         <!-- NID | Passport | Birth Certificate -->
         <android.support.design.widget.TextInputLayout
-            android:id="@+id/layout_reg_nid"
+            android:id="@+id/layout_user_nid"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <EditText
-                android:id="@+id/reg_nid"
+                android:id="@+id/user_nid"
                 android:inputType="text"
                 android:hint="NID or Birth Certificate"
                 android:layout_marginBottom="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </android.support.design.widget.TextInputLayout>
+
+        <!-- Gender -->
+        <RadioGroup
+            android:id="@+id/user_gender_group"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <RadioButton
+                android:id="@+id/user_gender_male"
+                android:checked="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Male"/>
+            <RadioButton
+                android:id="@+id/user_gender_female"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Female"/>
+            <RadioButton
+                android:id="@+id/user_gender_other"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Other"/>
+        </RadioGroup>
 
         <TextView
             android:textAlignment="center"
@@ -87,7 +118,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <Button
-            android:id="@+id/reg_button"
+            android:id="@+id/user_submit_button"
             android:text="Register"
             android:textColor="@color/white_color"
             android:background="@color/colorPrimary"

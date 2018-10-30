@@ -11,14 +11,30 @@
 
     <!-- Phone -->
     <android.support.design.widget.TextInputLayout
-        android:id="@+id/layout_reg_mobile_number"
+        android:id="@+id/layout_user_mobile_number"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <EditText
-            android:id="@+id/reg_mobile_number"
+            android:id="@+id/user_mobile_number"
             android:hint="Mobile Number"
             android:inputType="phone"
             android:maxLength="11"
+            android:layout_marginBottom="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </android.support.design.widget.TextInputLayout>
+
+    <!-- Code -->
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/layout_user_mobile_code"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/user_mobile_code"
+            android:hint="Code"
+            android:inputType="phone"
+            android:maxLength="4"
+            android:visibility="gone"
             android:layout_marginBottom="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
@@ -34,6 +50,16 @@
     <Button
         android:id="@+id/sent_button"
         android:text="Sent"
+        android:textColor="@color/white_color"
+        android:background="@color/colorPrimary"
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/submit_button"
+        android:text="Submit"
+        android:visibility="gone"
         android:textColor="@color/white_color"
         android:background="@color/colorPrimary"
         android:layout_gravity="center"

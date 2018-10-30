@@ -86,8 +86,8 @@ public final class SQLiteDAO {
         return data;
     }
 
-    public long updateByMobile(String tableName, ContentValues values, String mobile) {
-        long data = this.database.update(tableName, values, ConstantKey.USER_COLUMN5 + " = ?", new String[] { String.valueOf(mobile) });
+    public long updateByMobile(String tableName, ContentValues values, String columnName, String mobile) {
+        long data = this.database.update(tableName, values, columnName + " = ?", new String[] { String.valueOf(mobile) });
         //this.database.close();
         return data;
     }

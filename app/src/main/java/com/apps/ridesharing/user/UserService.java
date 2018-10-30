@@ -25,16 +25,17 @@ public class UserService {
     //Adding single object
     public long addData(UserModel model){
         final ContentValues values = new ContentValues();
-        values.put(ConstantKey.USER_COLUMN1, model.getUserName());
-        values.put(ConstantKey.USER_COLUMN2, model.getUserRelation());
-        values.put(ConstantKey.USER_COLUMN3, model.getUserOccupation());
-        values.put(ConstantKey.USER_COLUMN4, model.getUserEmail());
-        values.put(ConstantKey.USER_COLUMN5, model.getUserMobile());
-        values.put(ConstantKey.USER_COLUMN6, model.getUserAddress());
-        values.put(ConstantKey.USER_COLUMN7, model.getUserNid());
-        values.put(ConstantKey.USER_COLUMN8, model.getUserImage());
-        values.put(ConstantKey.USER_COLUMN9, model.getUserImagePath());
-        values.put(ConstantKey.USER_COLUMN10, model.getIsUserOwner());
+        values.put(ConstantKey.COLUMN_ID, model.getUserId());
+        values.put(ConstantKey.USER_COLUMN1, model.getUserMobileNumber());
+        values.put(ConstantKey.USER_COLUMN2, model.getUserFullName());
+        values.put(ConstantKey.USER_COLUMN3, model.getUserEmail());
+        values.put(ConstantKey.USER_COLUMN4, model.getUserBirthDate());
+        values.put(ConstantKey.USER_COLUMN5, model.getUserNid());
+        values.put(ConstantKey.USER_COLUMN6, model.getUserGender());
+        values.put(ConstantKey.USER_COLUMN7, model.getUserImageName());
+        values.put(ConstantKey.USER_COLUMN8, model.getUserImagePath());
+        values.put(ConstantKey.USER_COLUMN9, model.getUserLatitude());
+        values.put(ConstantKey.USER_COLUMN10, model.getUserLongitude());
         values.put(ConstantKey.USER_COLUMN11, "created by kamal");
         values.put(ConstantKey.USER_COLUMN12, "");
         values.put(ConstantKey.USER_COLUMN13, String.valueOf(new Timestamp(System.currentTimeMillis())));
@@ -78,21 +79,20 @@ public class UserService {
     //Updating single object
     public long updateDataById(UserModel model, String id) {
         ContentValues values = new ContentValues();
-        values.put(ConstantKey.USER_COLUMN1, model.getUserName());
-        values.put(ConstantKey.USER_COLUMN2, model.getUserRelation());
-        values.put(ConstantKey.USER_COLUMN3, model.getUserOccupation());
-        values.put(ConstantKey.USER_COLUMN4, model.getUserEmail());
-        values.put(ConstantKey.USER_COLUMN5, model.getUserMobile());
-        values.put(ConstantKey.USER_COLUMN6, model.getUserAddress());
-        values.put(ConstantKey.USER_COLUMN7, model.getUserNid());
-        values.put(ConstantKey.USER_COLUMN8, model.getUserImage());
-        values.put(ConstantKey.USER_COLUMN9, model.getUserImagePath());
-        values.put(ConstantKey.USER_COLUMN10, model.getIsUserOwner());
+        values.put(ConstantKey.COLUMN_ID, model.getUserId());
+        values.put(ConstantKey.USER_COLUMN1, model.getUserMobileNumber());
+        values.put(ConstantKey.USER_COLUMN2, model.getUserFullName());
+        values.put(ConstantKey.USER_COLUMN3, model.getUserEmail());
+        values.put(ConstantKey.USER_COLUMN4, model.getUserBirthDate());
+        values.put(ConstantKey.USER_COLUMN5, model.getUserNid());
+        values.put(ConstantKey.USER_COLUMN6, model.getUserGender());
+        values.put(ConstantKey.USER_COLUMN7, model.getUserImageName());
+        values.put(ConstantKey.USER_COLUMN8, model.getUserImagePath());
+        values.put(ConstantKey.USER_COLUMN9, model.getUserLatitude());
+        values.put(ConstantKey.USER_COLUMN10, model.getUserLongitude());
         values.put(ConstantKey.USER_COLUMN11, "created by kamal");
         values.put(ConstantKey.USER_COLUMN12, "");
         values.put(ConstantKey.USER_COLUMN13, String.valueOf(new Timestamp(System.currentTimeMillis())));
-
-        Log.i("updateDataById======= ", id+" "+String.valueOf(model.getUserName()) );
 
         return dao.updateById(ConstantKey.USER_TABLE_NAME, values, id);
     }
@@ -101,37 +101,36 @@ public class UserService {
     public long updateByMobile(UserModel model, String mobile) {
         ContentValues values = new ContentValues();
         values.put(ConstantKey.COLUMN_ID, model.getUserId());
-        values.put(ConstantKey.USER_COLUMN1, model.getUserName());
-        values.put(ConstantKey.USER_COLUMN2, model.getUserRelation());
-        values.put(ConstantKey.USER_COLUMN3, model.getUserOccupation());
-        values.put(ConstantKey.USER_COLUMN4, model.getUserEmail());
-        values.put(ConstantKey.USER_COLUMN5, model.getUserMobile());
-        values.put(ConstantKey.USER_COLUMN6, model.getUserAddress());
-        values.put(ConstantKey.USER_COLUMN7, model.getUserNid());
-        values.put(ConstantKey.USER_COLUMN8, model.getUserImage());
-        values.put(ConstantKey.USER_COLUMN9, model.getUserImagePath());
-        values.put(ConstantKey.USER_COLUMN10, model.getIsUserOwner());
+        values.put(ConstantKey.USER_COLUMN1, model.getUserMobileNumber());
+        values.put(ConstantKey.USER_COLUMN2, model.getUserFullName());
+        values.put(ConstantKey.USER_COLUMN3, model.getUserEmail());
+        values.put(ConstantKey.USER_COLUMN4, model.getUserBirthDate());
+        values.put(ConstantKey.USER_COLUMN5, model.getUserNid());
+        values.put(ConstantKey.USER_COLUMN6, model.getUserGender());
+        values.put(ConstantKey.USER_COLUMN7, model.getUserImageName());
+        values.put(ConstantKey.USER_COLUMN8, model.getUserImagePath());
+        values.put(ConstantKey.USER_COLUMN9, model.getUserLatitude());
+        values.put(ConstantKey.USER_COLUMN10, model.getUserLongitude());
         values.put(ConstantKey.USER_COLUMN11, "created by kamal");
         values.put(ConstantKey.USER_COLUMN12, "");
         values.put(ConstantKey.USER_COLUMN13, String.valueOf(new Timestamp(System.currentTimeMillis())));
 
-        return dao.updateByMobile(ConstantKey.USER_TABLE_NAME, values, mobile);
+        return dao.updateByMobile(ConstantKey.USER_TABLE_NAME, values, ConstantKey.USER_COLUMN1, mobile);
     }
-
 
     //Getting all objects
     public UserModel getDataById(String id){
         Cursor cursor = dao.getDataById(ConstantKey.USER_TABLE_NAME, id);
         if(cursor.getCount() > 0 && cursor != null) {
             cursor.moveToFirst();
-            userModel = new UserModel(cursor.getString(1),cursor.getString(2),cursor.getString(3),cursor.getString(4),cursor.getString(5),cursor.getString(6),cursor.getString(7),cursor.getString(8),cursor.getString(9),cursor.getString(10),cursor.getString(11),cursor.getString(12),cursor.getString(13));
+            userModel = new UserModel(cursor.getString(0),cursor.getString(1),cursor.getString(2),cursor.getString(3),cursor.getString(4),cursor.getString(5),cursor.getString(6),cursor.getString(7),cursor.getString(8),cursor.getString(9),cursor.getString(10),cursor.getString(11),cursor.getString(12),cursor.getString(13));
         }
         return userModel;
     }
 
     //Getting all objects
     public UserModel getDataByMobile(String mobile){
-        Cursor cursor = dao.getDataByMobile(ConstantKey.USER_TABLE_NAME, ConstantKey.USER_COLUMN5, mobile);
+        Cursor cursor = dao.getDataByMobile(ConstantKey.USER_TABLE_NAME, ConstantKey.USER_COLUMN1, mobile);
         if(cursor.getCount() > 0 && cursor != null) {
             cursor.moveToFirst();
             userModel = new UserModel(cursor.getString(0),cursor.getString(1),cursor.getString(2),cursor.getString(3),cursor.getString(4),cursor.getString(5),cursor.getString(6),cursor.getString(7),cursor.getString(8),cursor.getString(9),cursor.getString(10),cursor.getString(11),cursor.getString(12),cursor.getString(13));

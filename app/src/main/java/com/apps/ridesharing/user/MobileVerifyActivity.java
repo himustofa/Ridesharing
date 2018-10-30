@@ -1,6 +1,9 @@
 package com.apps.ridesharing.user;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.StrictMode;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,37 +12,64 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.apps.ridesharing.HomeActivity;
 import com.apps.ridesharing.R;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Random;
 
 public class MobileVerifyActivity extends AppCompatActivity {
 
     private static final String TAG = "MobileVerifyActivity";
-    private EditText mobile;
-    private Button btn;
+    private EditText mobileNumber, mobileCode;
+    private Button btnSent, btnSubmit;
+    private String tempCode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mobile_verify);
 
-        mobile = (EditText) findViewById(R.id.reg_mobile_number);
+        mobileNumber = (EditText) findViewById(R.id.user_mobile_number);
+        mobileCode = (EditText) findViewById(R.id.user_mobile_code);
+        btnSent = (Button) findViewById(R.id.sent_button);
+        btnSubmit = (Button) findViewById(R.id.submit_button);
 
-        btn = (Button) findViewById(R.id.sent_button);
-        btn.setOnClickListener(new View.OnClickListener() {
+        btnSent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!mobile.getText().toString().isEmpty()) {
-                    sendSms(mobile.getText().toString());
+                if (!mobileNumber.getText().toString().isEmpty()) {
+                    //sendSms(mobile.getText().toString());
+                    Random rand = new Random();
+                    tempCode = String.valueOf(rand.nextInt(9999)+1);
+
+                    mobileCode.setVisibility(View.VISIBLE);
+                    btnSubmit.setVisibility(View.VISIBLE);
+
+                    mobileNumber.setVisibility(View.GONE);
+                    btnSent.setVisibility(View.GONE);
+
+                    alertDialog(tempCode);
                 }
             }
         });
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
+
+        btnSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mobileCode.getText().toString().equals(tempCode)) {
+                    Intent intent = new Intent(MobileVerifyActivity.this, HomeActivity.class);
+                    startActivity(intent);
+                } else {
+                    alertDialog("Please check your code");
+                }
+            }
+        });
     }
 
     //https://www.textlocal.com/
@@ -75,6 +105,19 @@ public class MobileVerifyActivity extends AppCompatActivity {
             Toast.makeText(this, ""+e, Toast.LENGTH_SHORT).show();
             return "Error "+e;
         }
+    }
+
+    //====================================================| Alert Dialog
+    public void alertDialog(String msg) {
+        new AlertDialog.Builder(this)
+                .setTitle("Alert")
+                .setMessage(msg)
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int i) {
+                        dialog.dismiss();
+                    }
+                }).show();
     }
 
 }
