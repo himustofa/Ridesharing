@@ -79,7 +79,7 @@ public class UserInfoActivity extends AppCompatActivity {
 
         //===============================================| Initial AsyncTask
         if (userMobile != null && !userMobile.isEmpty()) {
-            new UserAsyncTask(context, new UserAsyncTask.AsyncResponse() {
+            new UserAsyncTaskBefore(context, new UserAsyncTaskBefore.AsyncResponse() {
                 @Override
                 public void processFinish(String output) {
                     if (output != null && !output.isEmpty()) {
@@ -181,7 +181,7 @@ public class UserInfoActivity extends AppCompatActivity {
 
                             String type = "update_user";
                             String encodeImage = imageToServer();
-                            new UserAsyncTaskBefore(context, new UserAsyncTaskBefore.AsyncResponse() {
+                            new UserAsyncTask(context, new UserAsyncTask.AsyncResponse() {
                                 @Override
                                 public void processFinish(String output) {
                                     if (output.equals("Updated successfully")) {

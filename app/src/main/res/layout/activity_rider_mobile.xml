@@ -1,9 +1,112 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:padding="15dp"
+    android:orientation="vertical"
+    android:gravity="center"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".rider.RiderMobileActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <!-- Phone -->
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/layout_rider_mobile_number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/rider_mobile_number"
+            android:hint="Mobile Number"
+            android:inputType="phone"
+            android:maxLength="11"
+            android:layout_marginBottom="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </android.support.design.widget.TextInputLayout>
+
+    <!-- Code -->
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/layout_rider_mobile_code"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/rider_mobile_code"
+            android:hint="Code"
+            android:inputType="phone"
+            android:maxLength="4"
+            android:layout_marginBottom="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </android.support.design.widget.TextInputLayout>
+
+    <!-- Password -->
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/layout_rider_password"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/rider_password"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:maxLength="25"
+            android:layout_marginBottom="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </android.support.design.widget.TextInputLayout>
+
+    <!-- Confirm Password -->
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/layout_rider_confirm_password"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/rider_confirm_password"
+            android:hint="Confirm Password"
+            android:inputType="textPassword"
+            android:maxLength="25"
+            android:layout_marginBottom="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </android.support.design.widget.TextInputLayout>
+
+
+    <TextView
+        android:textAlignment="center"
+        android:text="SMS may be sen to verify your number. Message and data rates may apply."
+        android:layout_marginBottom="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/sent"
+        android:text="Sent"
+        android:textColor="@color/white_color"
+        android:background="@color/colorPrimary"
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/submit_code"
+        android:text="Submit Code"
+        android:visibility="gone"
+        android:textColor="@color/white_color"
+        android:background="@color/colorPrimary"
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/submit"
+        android:text="Submit"
+        android:visibility="gone"
+        android:textColor="@color/white_color"
+        android:background="@color/colorPrimary"
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

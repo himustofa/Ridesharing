@@ -19,12 +19,14 @@ public final class SQLiteDAO {
             @Override
             public void onCreate(final SQLiteDatabase db) {
                 db.execSQL(ConstantKey.CREATE_USER_TABLE);
+                db.execSQL(ConstantKey.CREATE_RIDER_TABLE);
 
                 //db.execSQL(ConstantKey.INSERT_AD_POSTS_DATA1);
             }
             @Override
             public void onUpgrade(final SQLiteDatabase db, final int oldVersion, final int newVersion) {
                 db.execSQL(ConstantKey.DROP_USER_TABLE);
+                db.execSQL(ConstantKey.DROP_RIDER_TABLE);
                 this.onCreate(db);
             }
         };

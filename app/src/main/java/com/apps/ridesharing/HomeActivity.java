@@ -146,7 +146,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
-    //====================================================| Back press disabled and OptionsMenu
+    //====================================================| onBackPressed in Background and OptionsMenu
     @Override
     public void onBackPressed() {
         Intent intent = new Intent(Intent.ACTION_MAIN);
