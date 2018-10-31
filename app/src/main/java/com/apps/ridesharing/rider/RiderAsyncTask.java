@@ -265,6 +265,53 @@ public class RiderAsyncTask extends AsyncTask<String,Void,String> {
             }
         }
 
+        if(type.equals("update_rider_latlng")) {
+            String insert_url = "http://to-let.nhp-bd.com/mk_rider_update_latlng.php";
+            try {
+                String riderMobile = params[1];
+                String riderLatitude = params[2];
+                String riderLongitude = params[3];
+
+                URL url = new URL(insert_url);
+                HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoOutput(true);
+                httpURLConnection.setDoInput(true);
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+
+                String post_data = URLEncoder.encode("riderMobile","UTF-8")+"="+URLEncoder.encode(riderMobile,"UTF-8")+"&"
+                        +URLEncoder.encode("riderLatitude","UTF-8")+"="+URLEncoder.encode(riderLatitude,"UTF-8")+"&"
+                        +URLEncoder.encode("riderLongitude","UTF-8")+"="+URLEncoder.encode(riderLongitude,"UTF-8");
+
+                bufferedWriter.write(post_data);
+                bufferedWriter.flush();
+                bufferedWriter.close();
+                outputStream.close();
+                InputStream inputStream = httpURLConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream,"iso-8859-1"));
+                String result="";
+                String line="";
+                while((line = bufferedReader.readLine())!= null) {
+                    result += line;
+                }
+                bufferedReader.close();
+                inputStream.close();
+                httpURLConnection.disconnect();
+                return result;
+            } catch (MalformedURLException e) {
+                if(progress != null) {
+                    progress.dismiss(); //close the dialog if error occurs
+                }
+                e.printStackTrace();
+            } catch (IOException e) {
+                if(progress != null) {
+                    progress.dismiss(); //close the dialog if error occurs
+                }
+                e.printStackTrace();
+            }
+        }
+
         return null;
     }
 

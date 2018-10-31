@@ -1,9 +1,11 @@
 package com.apps.ridesharing;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Location;
@@ -30,9 +32,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.apps.ridesharing.database.ConstantKey;
 import com.apps.ridesharing.maps.DirectionFinder;
 import com.apps.ridesharing.maps.DirectionFinderListener;
 import com.apps.ridesharing.maps.Route;
+import com.apps.ridesharing.rider.RiderAsyncTask;
+import com.apps.ridesharing.user.UserAsyncTask;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.Status;
@@ -53,6 +58,9 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
@@ -65,6 +73,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private ActionBarDrawerToggle toggle;
 
     private static final String TAG = "HomeActivity";
+    private SharedPreferences preferences;
+    private boolean isLoggedIn;
+    private String userMobile;
     private GoogleMap mMap;
 
     private GoogleApiClient client;
@@ -78,10 +89,19 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private List<Polyline> polylinePaths = new ArrayList<>();
     private ProgressDialog progressDialog;
 
+    private Activity context;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        context = this;
+
+        //===============================================| Getting SharedPreferences
+        preferences = getSharedPreferences(ConstantKey.RIDER_LOGIN_KEY, MODE_PRIVATE);
+        isLoggedIn = preferences.getBoolean(ConstantKey.RIDER_IS_LOGGED_KEY, false);
+        userMobile = preferences.getString(ConstantKey.RIDER_MOBILE_KEY, "Data not found");
 
         //====================================| Custom Toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -376,7 +396,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public void onLocationChanged(Location location) {
         lastLocation = location;
-        //Toast.makeText(this, location.getLatitude()+","+location.getLongitude(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Change Location: "+location.getLatitude()+","+location.getLongitude(), Toast.LENGTH_SHORT).show();
 
         if (location == null) {
             Toast.makeText(this, "Location could not be found", Toast.LENGTH_SHORT).show();
@@ -398,6 +418,17 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         currentLocationMarker = mMap.addMarker(new MarkerOptions().position(latLng));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
         mMap.animateCamera(CameraUpdateFactory.zoomTo(15));*/
+
+        String type = "update_rider_latlng";
+        new RiderAsyncTask(context, new RiderAsyncTask.AsyncResponse() {
+            @Override
+            public void processFinish(String output) {
+                Log.d(TAG, ""+output);
+                if (output.equals("Updated successfully")) {
+
+                }
+            }
+        }).execute(type, userMobile, String.valueOf(location.getLatitude()),String.valueOf(location.getLongitude()));
     }
 
     //===============================================| Add Marker and Move Map Camera

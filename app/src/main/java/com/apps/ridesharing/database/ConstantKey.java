@@ -6,6 +6,7 @@ public class ConstantKey {
     public final static String USER_LOGIN_KEY = "userLoginInfo";
     public final static String USER_IS_LOGGED_KEY = "isUserLoggedIn";
     public final static String USER_MOBILE_KEY = "userMobile";
+
     public final static String RIDER_LOGIN_KEY = "riderLoginInfo";
     public final static String RIDER_IS_LOGGED_KEY = "isRiderLoggedIn";
     public final static String RIDER_MOBILE_KEY = "riderMobile";
