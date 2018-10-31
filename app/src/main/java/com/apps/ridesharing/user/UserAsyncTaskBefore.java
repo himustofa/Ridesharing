@@ -3,19 +3,10 @@ package com.apps.ridesharing.user;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
-import android.widget.Toast;
-
-import com.apps.ridesharing.HomeActivity;
 import com.apps.ridesharing.R;
-import com.apps.ridesharing.database.ConstantKey;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -31,15 +22,20 @@ import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.sql.Timestamp;
 
-public class UserBackgroundWorker extends AsyncTask<String,Void,String> {
+public class UserAsyncTaskBefore extends AsyncTask<String,Void,String> {
 
-    private static final String TAG = "UserBackgroundWorker";
+    public interface AsyncResponse {
+        void processFinish(String output);
+    }
+
+    private static final String TAG = "UserAsyncTaskBefore";
     private Context context;
     private ProgressDialog progress;
-    public IUserBackgroundWorker iWorker = null;
+    private AsyncResponse asyncResponse = null;
 
-    public UserBackgroundWorker(Context ctx) {
+    public UserAsyncTaskBefore(Context ctx, AsyncResponse response) {
         this.context = ctx;
+        this.asyncResponse = response;
     }
 
     @Override
@@ -228,7 +224,7 @@ public class UserBackgroundWorker extends AsyncTask<String,Void,String> {
 
     @Override
     protected void onPostExecute(String result) {
-        this.iWorker.processFinish(result);
+        this.asyncResponse.processFinish(result);
         if(this.progress != null) {
             this.progress.dismiss(); //close the dialog if error occurs
         }

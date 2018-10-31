@@ -57,14 +57,17 @@
         <activity
             android:name=".intro.SliderActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".user.SignUpActivity"
+        <activity
+            android:name=".user.UserInfoActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".user.SignInActivity"
+        <activity
+            android:name=".user.UserMobileActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".user.MobileVerifyActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".rider.RiderActivity"></activity>
+        <activity android:name=".rider.RiderMobileActivity" />
+        <activity android:name=".rider.RiderInfoActivity"></activity>
     </application>
 
 </manifest>

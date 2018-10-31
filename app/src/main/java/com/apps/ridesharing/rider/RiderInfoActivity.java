@@ -5,11 +5,11 @@ import android.os.Bundle;
 
 import com.apps.ridesharing.R;
 
-public class RiderActivity extends AppCompatActivity {
+public class RiderInfoActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_rider);
+        setContentView(R.layout.activity_rider_info);
     }
 }
