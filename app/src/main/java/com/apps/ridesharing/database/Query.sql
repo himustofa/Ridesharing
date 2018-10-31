@@ -51,7 +51,7 @@ CREATE TABLE active_riders (id INTEGER PRIMARY KEY AUTO_INCREMENT,
 	created_by_id TEXT,
 	updated_by_id TEXT,
 	created_at TEXT);
-	
+
 	
 	
 	

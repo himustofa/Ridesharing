@@ -152,8 +152,8 @@ public class RiderAsyncTask extends AsyncTask<String,Void,String> {
                 String createdById = "";
                 String updatedById = String.valueOf(new Timestamp(System.currentTimeMillis()));
                 String createdAt = params[13];
-                String riderId = params[14];
-                String encodeImage = params[15];
+                String encodeImage = params[14];
+                String riderId = params[15];
 
                 URL url = new URL(insert_url);
                 HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
@@ -177,8 +177,8 @@ public class RiderAsyncTask extends AsyncTask<String,Void,String> {
                         +URLEncoder.encode("riderImagePath","UTF-8")+"="+URLEncoder.encode(riderImagePath,"UTF-8")+"&"
                         +URLEncoder.encode("riderLatitude","UTF-8")+"="+URLEncoder.encode(riderLatitude,"UTF-8")+"&"
                         +URLEncoder.encode("riderLongitude","UTF-8")+"="+URLEncoder.encode(riderLongitude,"UTF-8")+"&"
-                        +URLEncoder.encode("riderId","UTF-8")+"="+URLEncoder.encode(riderId,"UTF-8")+"&"
                         +URLEncoder.encode("encodeImage","UTF-8")+"="+URLEncoder.encode(encodeImage,"UTF-8")+"&"
+                        +URLEncoder.encode("riderId","UTF-8")+"="+URLEncoder.encode(riderId,"UTF-8")+"&"
                         +URLEncoder.encode("createdById","UTF-8")+"="+URLEncoder.encode(createdById,"UTF-8")+"&"
                         +URLEncoder.encode("updatedById","UTF-8")+"="+URLEncoder.encode(updatedById,"UTF-8")+"&"
                         +URLEncoder.encode("createdAt","UTF-8")+"="+URLEncoder.encode(createdAt,"UTF-8");
@@ -213,6 +213,33 @@ public class RiderAsyncTask extends AsyncTask<String,Void,String> {
 
         if(type.equals("select_rider")) {
             String url = "http://to-let.nhp-bd.com/mk_rider_select.php?riderMobileNumber=" + params[1];
+            try {
+                URLConnection connection = new URL(url).openConnection();
+                connection.setConnectTimeout(1000 * 30);
+                connection.setReadTimeout(1000 * 30);
+
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream(),"iso-8859-1"));
+                String result="";
+                String line="";
+                while((line = bufferedReader.readLine())!= null) {
+                    result += line;
+                }
+                bufferedReader.close();
+
+                Log.d(TAG, String.valueOf(result));
+                return result;
+            } catch (Exception e) {
+                if(this.progress != null) {
+                    this.progress.dismiss(); //close the dialog if error occurs
+                }
+                e.printStackTrace();
+                alertDialog(e.getMessage());
+                return null;
+            }
+        }
+
+        if(type.equals("login_rider")) {
+            String url = "http://to-let.nhp-bd.com/mk_rider_login.php?riderMobileNumber=" + params[1] + "&riderPassword=" + params[2];
             try {
                 URLConnection connection = new URL(url).openConnection();
                 connection.setConnectTimeout(1000 * 30);

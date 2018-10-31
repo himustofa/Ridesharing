@@ -111,23 +111,39 @@
                 android:text="Other"/>
         </RadioGroup>
 
-        <!-- District -->
-        <Spinner
-            android:id="@+id/rider_district"
-            android:layout_marginBottom="10dp"
-            android:textColor="@color/deep_grey_color"
-            android:entries="@array/district_array"
+        <!-- District and Vehicle -->
+        <LinearLayout
+            android:weightSum="100"
+            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="50dp" />
-
-        <!-- Vehicle -->
-        <Spinner
-            android:id="@+id/rider_vehicle"
-            android:layout_marginBottom="10dp"
-            android:textColor="@color/deep_grey_color"
-            android:entries="@array/vehicle_array"
-            android:layout_width="match_parent"
-            android:layout_height="50dp" />
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="50">
+                <!-- District -->
+                <Spinner
+                    android:id="@+id/rider_district"
+                    android:layout_marginBottom="10dp"
+                    android:textColor="@color/deep_grey_color"
+                    android:entries="@array/district_array"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="50">
+                <!-- Vehicle -->
+                <Spinner
+                    android:id="@+id/rider_vehicle"
+                    android:layout_marginBottom="10dp"
+                    android:textColor="@color/deep_grey_color"
+                    android:entries="@array/vehicle_array"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp" />
+            </LinearLayout>
+        </LinearLayout>
 
         <!-- License -->
         <android.support.design.widget.TextInputLayout

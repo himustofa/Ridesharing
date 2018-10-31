@@ -117,6 +117,11 @@ public class RiderInfoActivity extends AppCompatActivity {
                                 other.setChecked(true);
                             }
 
+                            riderDistrict.setSelection(adapterDistrict.getPosition(jsonObject.getString("rider_district")));
+                            riderVehicle.setSelection(adapterVehicle.getPosition(jsonObject.getString("rider_vehicle")));
+                            riderLicense.setText(jsonObject.getString("rider_license"));
+                            riderVehicleNo.setText(jsonObject.getString("rider_vehicle_no"));
+
                             riderImageName = jsonObject.getString("rider_image_name");
                             if (riderImageName != null && !riderImageName.isEmpty()) {
                                 String img = jsonObject.getString("rider_image_path")+jsonObject.getString("rider_image_name");

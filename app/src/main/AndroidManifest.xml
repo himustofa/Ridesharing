@@ -66,9 +66,12 @@
         <activity
             android:name=".user.MobileVerifyActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".rider.RiderMobileActivity" />
-        <activity android:name=".rider.RiderInfoActivity" />
-        <activity android:name=".rider.RiderLoginActivity"></activity>
+        <activity android:name=".rider.RiderMobileActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".rider.RiderInfoActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".rider.RiderLoginActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

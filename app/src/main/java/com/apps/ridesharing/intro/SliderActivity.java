@@ -19,6 +19,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.apps.ridesharing.R;
+import com.apps.ridesharing.rider.RiderLoginActivity;
+import com.apps.ridesharing.rider.RiderMobileActivity;
 import com.apps.ridesharing.user.UserMobileActivity;
 
 public class SliderActivity extends AppCompatActivity {
@@ -118,7 +120,7 @@ public class SliderActivity extends AppCompatActivity {
 
     private void launchHomeScreen() {
         prefManager.setFirstTimeLaunch(false);
-        startActivity(new Intent(SliderActivity.this, UserMobileActivity.class));
+        startActivity(new Intent(SliderActivity.this, RiderLoginActivity.class));
         finish();
     }
 
