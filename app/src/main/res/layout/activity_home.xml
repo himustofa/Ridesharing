@@ -54,6 +54,10 @@
                 android:layout_height="wrap_content"
                 android:text="0 min"
                 android:id="@+id/duration_place" />
+            <!--<Switch
+                android:id="@+id/is_online_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>-->
 
             <EditText
                 android:id="@+id/origin_place"

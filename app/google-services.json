@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "1084956900821",
+    "firebase_url": "https://meta-map-221208.firebaseio.com",
+    "project_id": "meta-map-221208",
+    "storage_bucket": "meta-map-221208.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1084956900821:android:13ff4f5789177c5b",
+        "android_client_info": {
+          "package_name": "com.apps.ridesharing"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1084956900821-dfi7f8hepi6i5n6v9ieliove6k0l4kk9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAPrTQgr2Sqnfmu26ppFoRr_n4HvqXM2U4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
