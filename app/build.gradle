@@ -31,7 +31,12 @@ dependencies {
     implementation 'com.google.android.gms:play-services-places:16.0.0'
     implementation 'com.google.android.gms:play-services-location:16.0.0'
     //Firebase
+    implementation 'com.google.firebase:firebase-core:16.0.4'
     implementation 'com.google.firebase:firebase-messaging:17.3.4'
+    //DirectionCallback
+    implementation 'com.akexorcist:googledirectionlibrary:1.1.1'
+    //Volley is an HTTP library that makes networking for Android apps easier and most importantly, faster.
+    implementation 'com.android.volley:volley:1.1.1'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'

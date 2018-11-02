@@ -23,6 +23,13 @@ CREATE TABLE active_users (id INTEGER PRIMARY KEY AUTO_INCREMENT,
 	updated_by_id TEXT,
 	created_at TEXT);
 
+CREATE TABLE users_token (id INTEGER PRIMARY KEY AUTO_INCREMENT,
+	user_mobile_number TEXT,
+	user_token TEXT,
+	created_by_id TEXT,
+	updated_by_id TEXT,
+	created_at TEXT);
+
 CREATE TABLE riders (id INTEGER PRIMARY KEY AUTO_INCREMENT,
 	rider_mobile_number TEXT,
 	rider_password TEXT,
@@ -48,8 +55,19 @@ CREATE TABLE active_riders (id INTEGER PRIMARY KEY AUTO_INCREMENT,
 	rider_id TEXT,
 	user_mobile_number TEXT,
 	user_id TEXT,
-	rider_latitude TEXT,
-	rider_longitude TEXT,
+	rider_origin_latitude TEXT,
+	rider_origin_longitude TEXT,
+	rider_destination_latitude TEXT,
+	rider_destination_longitude TEXT,
+	rider_available_time TEXT,
+	rider_price TEXT,
+	created_by_id TEXT,
+	updated_by_id TEXT,
+	created_at TEXT);
+	
+CREATE TABLE riders_token (id INTEGER PRIMARY KEY AUTO_INCREMENT,
+	rider_mobile_number TEXT,
+	rider_token TEXT,
 	created_by_id TEXT,
 	updated_by_id TEXT,
 	created_at TEXT);

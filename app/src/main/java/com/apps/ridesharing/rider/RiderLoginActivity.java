@@ -14,12 +14,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.apps.ridesharing.HomeActivity;
 import com.apps.ridesharing.R;
 import com.apps.ridesharing.database.ConstantKey;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 public class RiderLoginActivity extends AppCompatActivity {
 
@@ -44,8 +40,8 @@ public class RiderLoginActivity extends AppCompatActivity {
         boolean isLoggedIn = preferences.getBoolean(ConstantKey.RIDER_IS_LOGGED_KEY,false);
 
         if (isLoggedIn) {
-            Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
-            startActivity(intent);
+            //Intent intent = new Intent(getApplicationContext(), HomeRiderActivity.class);
+            //startActivity(intent);
         }
 
         //===============================================| findViewById
@@ -75,7 +71,7 @@ public class RiderLoginActivity extends AppCompatActivity {
                                 editor.apply();
                                 editor.commit();
 
-                                Intent intent = new Intent(context, HomeActivity.class);
+                                Intent intent = new Intent(context, RiderOnlineActivity.class);
                                 startActivity(intent);
                             } else {
                                 alertDialog("Create a new account");

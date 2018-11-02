@@ -312,6 +312,167 @@ public class RiderAsyncTask extends AsyncTask<String,Void,String> {
             }
         }
 
+        if(type.equals("online_rider")) {
+            String insert_url = "http://to-let.nhp-bd.com/mk_rider_online.php";
+            try {
+                String riderMobileNumber = params[1];
+                String riderId = "";
+                String userMobileNumber = "";
+                String userId = "";
+                String riderOriginLatitude = "";
+                String riderOriginLongitude = "";
+                String riderDestinationLatitude = params[2];
+                String riderDestinationLongitude = params[3];
+                String riderAvailableTime = params[4];
+                String riderPrice = params[5];
+                String createdById = "";
+                String updatedById = "";
+                String createdAt = String.valueOf(new Timestamp(System.currentTimeMillis()));
+
+                URL url = new URL(insert_url);
+                HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoOutput(true);
+                httpURLConnection.setDoInput(true);
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+
+                String post_data = URLEncoder.encode("riderMobileNumber","UTF-8")+"="+URLEncoder.encode(riderMobileNumber,"UTF-8")+"&"
+                        +URLEncoder.encode("riderId","UTF-8")+"="+URLEncoder.encode(riderId,"UTF-8")+"&"
+                        +URLEncoder.encode("userMobileNumber","UTF-8")+"="+URLEncoder.encode(userMobileNumber,"UTF-8")+"&"
+                        +URLEncoder.encode("userId","UTF-8")+"="+URLEncoder.encode(userId,"UTF-8")+"&"
+                        +URLEncoder.encode("riderOriginLatitude","UTF-8")+"="+URLEncoder.encode(riderOriginLatitude,"UTF-8")+"&"
+                        +URLEncoder.encode("riderOriginLongitude","UTF-8")+"="+URLEncoder.encode(riderOriginLongitude,"UTF-8")+"&"
+                        +URLEncoder.encode("riderDestinationLatitude","UTF-8")+"="+URLEncoder.encode(riderDestinationLatitude,"UTF-8")+"&"
+                        +URLEncoder.encode("riderDestinationLongitude","UTF-8")+"="+URLEncoder.encode(riderDestinationLongitude,"UTF-8")+"&"
+                        +URLEncoder.encode("riderAvailableTime","UTF-8")+"="+URLEncoder.encode(riderAvailableTime,"UTF-8")+"&"
+                        +URLEncoder.encode("riderPrice","UTF-8")+"="+URLEncoder.encode(riderPrice,"UTF-8")+"&"
+                        +URLEncoder.encode("createdById","UTF-8")+"="+URLEncoder.encode(createdById,"UTF-8")+"&"
+                        +URLEncoder.encode("updatedById","UTF-8")+"="+URLEncoder.encode(updatedById,"UTF-8")+"&"
+                        +URLEncoder.encode("createdAt","UTF-8")+"="+URLEncoder.encode(createdAt,"UTF-8");
+
+                bufferedWriter.write(post_data);
+                bufferedWriter.flush();
+                bufferedWriter.close();
+                outputStream.close();
+                InputStream inputStream = httpURLConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream,"iso-8859-1"));
+                String result="";
+                String line="";
+                while((line = bufferedReader.readLine())!= null) {
+                    result += line;
+                }
+                bufferedReader.close();
+                inputStream.close();
+                httpURLConnection.disconnect();
+                return result;
+            } catch (MalformedURLException e) {
+                if(progress != null) {
+                    progress.dismiss(); //close the dialog if error occurs
+                }
+                e.printStackTrace();
+            } catch (IOException e) {
+                if(progress != null) {
+                    progress.dismiss(); //close the dialog if error occurs
+                }
+                e.printStackTrace();
+            }
+        }
+
+        if(type.equals("offline_rider")) {
+            String insert_url = "http://to-let.nhp-bd.com/mk_rider_offline.php";
+            try {
+                String riderMobileNumber = params[1];
+
+                URL url = new URL(insert_url);
+                HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoOutput(true);
+                httpURLConnection.setDoInput(true);
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+
+                String post_data = URLEncoder.encode("riderMobileNumber","UTF-8")+"="+URLEncoder.encode(riderMobileNumber,"UTF-8");
+
+                bufferedWriter.write(post_data);
+                bufferedWriter.flush();
+                bufferedWriter.close();
+                outputStream.close();
+                InputStream inputStream = httpURLConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream,"iso-8859-1"));
+                String result="";
+                String line="";
+                while((line = bufferedReader.readLine())!= null) {
+                    result += line;
+                }
+                bufferedReader.close();
+                inputStream.close();
+                httpURLConnection.disconnect();
+                return result;
+            } catch (MalformedURLException e) {
+                if(progress != null) {
+                    progress.dismiss(); //close the dialog if error occurs
+                }
+                e.printStackTrace();
+            } catch (IOException e) {
+                if(progress != null) {
+                    progress.dismiss(); //close the dialog if error occurs
+                }
+                e.printStackTrace();
+            }
+        }
+
+        if(type.equals("insert_token")) {
+            String insert_url = "http://to-let.nhp-bd.com/mk_insert_token.php";
+            try {
+                String riderMobileNumber = params[1];
+                String fcmToken = params[2];
+                String createdById = "";
+                String updatedById = "";
+                String createdAt = String.valueOf(new Timestamp(System.currentTimeMillis()));
+
+                URL url = new URL(insert_url);
+                HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoOutput(true);
+                httpURLConnection.setDoInput(true);
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+
+                String post_data = URLEncoder.encode("riderMobileNumber","UTF-8")+"="+URLEncoder.encode(riderMobileNumber,"UTF-8")+"&"
+                        +URLEncoder.encode("fcmToken","UTF-8")+"="+URLEncoder.encode(fcmToken,"UTF-8")+"&"
+                        +URLEncoder.encode("createdById","UTF-8")+"="+URLEncoder.encode(createdById,"UTF-8")+"&"
+                        +URLEncoder.encode("updatedById","UTF-8")+"="+URLEncoder.encode(updatedById,"UTF-8")+"&"
+                        +URLEncoder.encode("createdAt","UTF-8")+"="+URLEncoder.encode(createdAt,"UTF-8");
+
+                bufferedWriter.write(post_data);
+                bufferedWriter.flush();
+                bufferedWriter.close();
+                outputStream.close();
+                InputStream inputStream = httpURLConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream,"iso-8859-1"));
+                String result="";
+                String line="";
+                while((line = bufferedReader.readLine())!= null) {
+                    result += line;
+                }
+                bufferedReader.close();
+                inputStream.close();
+                httpURLConnection.disconnect();
+                return result;
+            } catch (MalformedURLException e) {
+                if(progress != null) {
+                    progress.dismiss(); //close the dialog if error occurs
+                }
+                e.printStackTrace();
+            } catch (IOException e) {
+                if(progress != null) {
+                    progress.dismiss(); //close the dialog if error occurs
+                }
+                e.printStackTrace();
+            }
+        }
+
         return null;
     }
 

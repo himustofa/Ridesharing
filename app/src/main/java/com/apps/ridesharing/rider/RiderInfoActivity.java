@@ -214,7 +214,7 @@ public class RiderInfoActivity extends AppCompatActivity {
                                 @Override
                                 public void processFinish(String output) {
                                     if (output.equals("Updated successfully")) {
-                                        Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+                                        Intent intent = new Intent(getApplicationContext(), RiderLoginActivity.class);
                                         startActivity(intent);
                                     }
                                 }

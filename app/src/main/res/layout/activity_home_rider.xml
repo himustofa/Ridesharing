@@ -28,48 +28,20 @@
             android:layout_height="wrap_content">
             <TextView
                 android:id="@+id/is_online"
-                android:text="Offline"
+                android:text="Online"
                 android:textSize="16sp"
+                android:textColor="@color/colorPrimary"
                 android:layout_centerInParent="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <Switch
                 android:id="@+id/is_online_switch"
                 android:layout_alignParentRight="true"
+                android:checked="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
         </RelativeLayout>
     </android.support.v7.widget.Toolbar>
-
-    <!--Distance and Duration-->
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <TextView
-            android:layout_marginLeft="5dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="0 km"
-            android:id="@+id/distance_place" />
-        <TextView
-            android:layout_marginLeft="5dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="0 min"
-            android:id="@+id/duration_place" />
-
-        <EditText
-            android:id="@+id/origin_place"
-            android:visibility="gone"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <EditText
-            android:id="@+id/destination_place"
-            android:visibility="gone"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
 
     <!--Price and Request Button-->
     <LinearLayout

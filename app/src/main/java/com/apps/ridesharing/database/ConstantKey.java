@@ -11,6 +11,9 @@ public class ConstantKey {
     public final static String RIDER_IS_LOGGED_KEY = "isRiderLoggedIn";
     public final static String RIDER_MOBILE_KEY = "riderMobile";
 
+    public final static String FCM_PREFERENCES_KEY = "appTokenInfo";
+    public final static String FCM_TOKEN_KEY = "fcmToken";
+
     //=======================| UserModel |=======================
     public final static String USER_TABLE_NAME = "users";
     public final static String USER_COLUMN1 = "user_mobile_number";

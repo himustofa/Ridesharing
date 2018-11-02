@@ -20,8 +20,6 @@ import android.widget.TextView;
 
 import com.apps.ridesharing.R;
 import com.apps.ridesharing.rider.RiderLoginActivity;
-import com.apps.ridesharing.rider.RiderMobileActivity;
-import com.apps.ridesharing.user.UserMobileActivity;
 
 public class SliderActivity extends AppCompatActivity {
 
