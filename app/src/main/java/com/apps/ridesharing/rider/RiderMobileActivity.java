@@ -52,8 +52,8 @@ public class RiderMobileActivity extends AppCompatActivity {
         boolean isLoggedIn = preferences.getBoolean(ConstantKey.RIDER_IS_LOGGED_KEY,false);
 
         if (isLoggedIn) {
-            Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
-            startActivity(intent);
+            //Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+            //startActivity(intent);
         }
 
         //===============================================| findViewById

@@ -45,7 +45,7 @@
 
     <!--Price and Request Button-->
     <LinearLayout
-        android:id="@+id/request_bar"
+        android:id="@+id/rider_notification_box"
         android:padding="15dp"
         android:orientation="vertical"
         android:layout_alignBottom="@+id/map"
@@ -65,20 +65,23 @@
             android:layout_width="75dp"
             android:layout_height="75dp" />
         <TextView
-            android:text="BIKE"
+            android:id="@+id/user_name"
+            android:text="User Name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
-            android:text="৳ 200"
+            android:id="@+id/user_mobile"
+            android:text="User Mobile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <Button
+            android:id="@+id/rider_notification_box_ok"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:background="@color/colorPrimary"
             android:foreground="?attr/selectableItemBackground"
-            android:text="SEND REQUEST"
+            android:text="OK"
             android:textColor="#fff" />
     </LinearLayout>
 

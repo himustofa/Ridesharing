@@ -20,7 +20,9 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -54,7 +56,7 @@ import java.util.ArrayList;
 
 public class HomeRiderActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener, DirectionCallback {
 
-    private static final String TAG = "HomeActivity";
+    private static final String TAG = "HomeRiderActivity";
     private Activity context;
 
     //Navigation
@@ -70,12 +72,14 @@ public class HomeRiderActivity extends AppCompatActivity implements OnMapReadyCa
     private Marker currentLocationMarker;
     private Location lastLocation;
 
-    private String serverKey = "AIzaSyAOkt7gAwlYNJRDzgYuZ0Fq2XOi7fvlJhg";
+    private String serverKey = "AIzaSyCCGReTLzs3myqFuZNN1tXK1GRawxjy3Ao";
     private LatLng origin = null;
     private LatLng destination = null;
 
     private Switch isOnlineSwitch;
     private TextView isOnline;
+    private LinearLayout notificationBox;
+    String lat, lng;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +87,41 @@ public class HomeRiderActivity extends AppCompatActivity implements OnMapReadyCa
         setContentView(R.layout.activity_home_rider);
 
         context = this;
+
+        //===============================================| Notification Data from MyFirebaseMessagingService
+        if (getIntent().getExtras() != null) {
+            notificationBox = (LinearLayout) findViewById(R.id.rider_notification_box);
+            notificationBox.setVisibility(View.VISIBLE);
+
+            String name = getIntent().getExtras().getString("user_full_name");
+            TextView userName = (TextView) findViewById(R.id.user_name);
+            userName.setText(name);
+
+            String mobile = getIntent().getExtras().getString("user_mobile");
+            TextView userMobile = (TextView) findViewById(R.id.user_mobile);
+            userMobile.setText(mobile);
+
+            lat = getIntent().getExtras().getString("user_latitude");
+            lng = getIntent().getExtras().getString("user_longitude");
+            Log.d(TAG, "Notification: "+name+" : "+mobile);
+        }
+
+        Button ok = (Button) findViewById(R.id.rider_notification_box_ok);
+        ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                notificationBox.setVisibility(View.GONE);
+                destination = new LatLng(Double.parseDouble(lat), Double.parseDouble(lng));
+                requestDirection();
+            }
+        });
+        Button close = (Button) findViewById(R.id.close);
+        close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                notificationBox.setVisibility(View.GONE);
+            }
+        });
 
         //===============================================| Getting SharedPreferences
         preferences = getSharedPreferences(ConstantKey.RIDER_LOGIN_KEY, MODE_PRIVATE);
@@ -131,9 +170,6 @@ public class HomeRiderActivity extends AppCompatActivity implements OnMapReadyCa
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             checkLocationPermission();
         }
-
-        //destination = new LatLng(place.getLatLng().latitude, place.getLatLng().longitude);
-        //requestDirection();
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
@@ -326,10 +362,10 @@ public class HomeRiderActivity extends AppCompatActivity implements OnMapReadyCa
     @Override
     public void onLocationChanged(Location location) {
         lastLocation = location;
-        Toast.makeText(this, "Change Location: "+location.getLatitude()+","+location.getLongitude(), Toast.LENGTH_SHORT).show();
+        Log.d(TAG, "Change Location: "+location.getLatitude()+","+location.getLongitude());
 
         if (location == null) {
-            Toast.makeText(this, "Location could not be found", Toast.LENGTH_SHORT).show();
+            Log.d(TAG, "Location could not be found");
         } else {
             origin = new LatLng(location.getLatitude(), location.getLongitude());
             addMarker(location.getLatitude(),location.getLongitude(),"Current Location");
@@ -410,7 +446,7 @@ public class HomeRiderActivity extends AppCompatActivity implements OnMapReadyCa
                         mMap.setMyLocationEnabled(true);
                     }
                 } else {
-                    Toast.makeText(this, "permission denied", Toast.LENGTH_LONG).show();
+                    Log.d(TAG, "permission denied");
                 }
                 return;
             }
@@ -419,6 +455,7 @@ public class HomeRiderActivity extends AppCompatActivity implements OnMapReadyCa
 
     //===============================================| Direction
     public void requestDirection() {
+        Log.d(TAG, "Direction: "+origin.longitude+destination.longitude);
         GoogleDirection.withServerKey(serverKey)
                 .from(origin)
                 .to(destination)
@@ -431,20 +468,21 @@ public class HomeRiderActivity extends AppCompatActivity implements OnMapReadyCa
     public void onDirectionSuccess(Direction direction, String rawBody) {
         if (direction.isOK()) {
             Route route = direction.getRouteList().get(0);
-            mMap.addMarker(new MarkerOptions().position(origin).icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_radio_button_checked_black_24dp)));
-            mMap.addMarker(new MarkerOptions().position(destination).icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_radio_button_checked_black_24dp)));
+            //mMap.addMarker(new MarkerOptions().position(origin).icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_radio_button_checked_black_24dp)));
+            mMap.addMarker(new MarkerOptions().position(origin).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
+            mMap.addMarker(new MarkerOptions().position(destination).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
 
             ArrayList<LatLng> directionPositionList = route.getLegList().get(0).getDirectionPoint();
             mMap.addPolyline(DirectionConverter.createPolyline(this, directionPositionList, 5, Color.parseColor("#008577")));
             setCameraWithCoordinationBounds(route);
         } else {
-            Toast.makeText(this, ""+direction.getStatus(), Toast.LENGTH_SHORT).show();
+            Log.d(TAG, "Direction is not ok: "+direction.getStatus());
         }
     }
 
     @Override
     public void onDirectionFailure(Throwable t) {
-        Toast.makeText(this, ""+t.getMessage(), Toast.LENGTH_SHORT).show();
+        Log.d(TAG, "Direction is not ok: "+t.getMessage());
     }
 
     private void setCameraWithCoordinationBounds(Route route) {

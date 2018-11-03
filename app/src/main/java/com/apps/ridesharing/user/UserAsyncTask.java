@@ -219,6 +219,112 @@ public class UserAsyncTask extends AsyncTask<String,Void,String> {
             }
         }
 
+        if(type.equals("search_online_rider")) {
+            String server_url = "http://to-let.nhp-bd.com/mk_rider_online_select.php";
+            try {
+                String userMobileNumber = params[1];
+                String userOriginLatitude = params[2];
+                String userOriginLongitude = params[3];
+                String userDestinationLatitude = params[4];
+                String userDestinationLongitude = params[5];
+
+                URL url = new URL(server_url);
+                HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoOutput(true);
+                httpURLConnection.setDoInput(true);
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+
+                String post_data = URLEncoder.encode("userMobileNumber","UTF-8")+"="+URLEncoder.encode(userMobileNumber,"UTF-8")+"&"
+                        +URLEncoder.encode("userOriginLatitude","UTF-8")+"="+URLEncoder.encode(userOriginLatitude,"UTF-8")+"&"
+                        +URLEncoder.encode("userOriginLongitude","UTF-8")+"="+URLEncoder.encode(userOriginLongitude,"UTF-8")+"&"
+                        +URLEncoder.encode("userDestinationLatitude","UTF-8")+"="+URLEncoder.encode(userDestinationLatitude,"UTF-8")+"&"
+                        +URLEncoder.encode("userDestinationLongitude","UTF-8")+"="+URLEncoder.encode(userDestinationLongitude,"UTF-8");
+
+                bufferedWriter.write(post_data);
+                bufferedWriter.flush();
+                bufferedWriter.close();
+                outputStream.close();
+                InputStream inputStream = httpURLConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream,"iso-8859-1"));
+                String result="";
+                String line="";
+                while((line = bufferedReader.readLine())!= null) {
+                    result += line;
+                }
+                bufferedReader.close();
+                inputStream.close();
+                httpURLConnection.disconnect();
+                return result;
+            } catch (MalformedURLException e) {
+                if(progress != null) {
+                    progress.dismiss(); //close the dialog if error occurs
+                }
+                e.printStackTrace();
+            } catch (IOException e) {
+                if(progress != null) {
+                    progress.dismiss(); //close the dialog if error occurs
+                }
+                e.printStackTrace();
+            }
+        }
+
+        if(type.equals("send_notification")) {
+            String server_url = "http://to-let.nhp-bd.com/mk_send_notification.php";
+            try {
+                String riderMobileNumber = params[1];
+                String userFullName = params[2];
+                String userMobileNumber = params[3];
+                String userDestinationLatitude = params[4];
+                String userDestinationLongitude = params[5];
+                String title = params[6];
+                String message = params[7];
+
+                URL url = new URL(server_url);
+                HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoOutput(true);
+                httpURLConnection.setDoInput(true);
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+
+                String post_data = URLEncoder.encode("riderMobileNumber","UTF-8")+"="+URLEncoder.encode(riderMobileNumber,"UTF-8")+"&"
+                        +URLEncoder.encode("userFullName","UTF-8")+"="+URLEncoder.encode(userFullName,"UTF-8")+"&"
+                        +URLEncoder.encode("userMobileNumber","UTF-8")+"="+URLEncoder.encode(userMobileNumber,"UTF-8")+"&"
+                        +URLEncoder.encode("userDestinationLatitude","UTF-8")+"="+URLEncoder.encode(userDestinationLatitude,"UTF-8")+"&"
+                        +URLEncoder.encode("userDestinationLongitude","UTF-8")+"="+URLEncoder.encode(userDestinationLongitude,"UTF-8")+"&"
+                        +URLEncoder.encode("title","UTF-8")+"="+URLEncoder.encode(title,"UTF-8")+"&"
+                        +URLEncoder.encode("message","UTF-8")+"="+URLEncoder.encode(message,"UTF-8");
+
+                bufferedWriter.write(post_data);
+                bufferedWriter.flush();
+                bufferedWriter.close();
+                outputStream.close();
+                InputStream inputStream = httpURLConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream,"iso-8859-1"));
+                String result="";
+                String line="";
+                while((line = bufferedReader.readLine())!= null) {
+                    result += line;
+                }
+                bufferedReader.close();
+                inputStream.close();
+                httpURLConnection.disconnect();
+                return result;
+            } catch (MalformedURLException e) {
+                if(progress != null) {
+                    progress.dismiss(); //close the dialog if error occurs
+                }
+                e.printStackTrace();
+            } catch (IOException e) {
+                if(progress != null) {
+                    progress.dismiss(); //close the dialog if error occurs
+                }
+                e.printStackTrace();
+            }
+        }
+
         return null;
     }
 

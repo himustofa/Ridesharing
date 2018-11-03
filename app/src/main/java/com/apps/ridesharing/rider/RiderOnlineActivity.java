@@ -28,6 +28,7 @@ import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;
 import com.google.android.gms.location.places.ui.PlaceSelectionListener;
 import com.google.android.gms.maps.model.LatLng;
 
+import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
@@ -44,8 +45,6 @@ public class RiderOnlineActivity extends AppCompatActivity {
     private Button btnStart;
 
     private LatLng destination = null;
-
-    String url = "http://to-let.nhp-bd.com/mk_insert_token.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -119,7 +118,8 @@ public class RiderOnlineActivity extends AppCompatActivity {
 
 
                 //====================================| Insert Token
-                /*StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+                /*String url = "http://to-let.nhp-bd.com/mk_insert_token.php";
+                StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         Log.d(TAG, "Token response: "+response);
@@ -135,6 +135,9 @@ public class RiderOnlineActivity extends AppCompatActivity {
                         Map<String, String> map = new HashMap<String, String>();
                         map.put("riderMobileNumber",riderMobile);
                         map.put("fcmToken",token);
+                        map.put("createdById","");
+                        map.put("updatedById","");
+                        map.put("createdAt",String.valueOf(new Timestamp(System.currentTimeMillis())));
                         Log.d(TAG, "Map: "+riderMobile+" "+token);
                         return map;
                     }

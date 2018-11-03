@@ -28,7 +28,9 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -91,6 +93,11 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
     private Activity context;
 
+    private LinearLayout requestBox;
+    private String originLatitude, originLongitude, destinationLatitude, destinationLongitude;
+    private String riderMobile, riderTime, riderPrice;
+    private String userName = "Anonymous";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -99,9 +106,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         context = this;
 
         //===============================================| Getting SharedPreferences
-        preferences = getSharedPreferences(ConstantKey.RIDER_LOGIN_KEY, MODE_PRIVATE);
-        isLoggedIn = preferences.getBoolean(ConstantKey.RIDER_IS_LOGGED_KEY, false);
-        userMobile = preferences.getString(ConstantKey.RIDER_MOBILE_KEY, "Data not found");
+        preferences = getSharedPreferences(ConstantKey.USER_LOGIN_KEY, MODE_PRIVATE);
+        isLoggedIn = preferences.getBoolean(ConstantKey.USER_IS_LOGGED_KEY, false);
+        userMobile = preferences.getString(ConstantKey.USER_MOBILE_KEY, "Data not found");
 
         //====================================| Custom Toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -149,10 +156,41 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onPlaceSelected(Place place) {
                 Log.d(TAG, "Place selected: " + place.getName());
+                destinationLatitude = String.valueOf(place.getLatLng().latitude);
+                destinationLongitude = String.valueOf(place.getLatLng().longitude);
                 destinationPlace.setText(place.getLatLng().latitude+","+place.getLatLng().longitude);
-                sendRequest();
+                //sendRequest();
                 //goToLocation(place.getLatLng().latitude, place.getLatLng().longitude,15);
                 //addMarker(place.getLatLng().latitude, place.getLatLng().longitude, place.getName().toString());
+                //----------------------------------------------------------------------------------------------------| Search Online Rider
+                String type = "search_online_rider";
+                new UserAsyncTask(context, new UserAsyncTask.AsyncResponse() {
+                    @Override
+                    public void processFinish(String output) {
+                        Log.d(TAG, ""+output);
+                        if (output != null && !output.isEmpty()) {
+                            JSONObject jsonObject = null;
+                            try {
+                                jsonObject = new JSONObject(output);
+                                riderMobile = jsonObject.getString("rider_mobile_number");
+                                //riderName = jsonObject.getString("rider_full_name");
+                                riderTime = jsonObject.getString("rider_available_time");
+                                riderPrice = jsonObject.getString("rider_price");
+
+                                requestBox = (LinearLayout) findViewById(R.id.request_box);
+                                requestBox.setVisibility(View.VISIBLE);
+                                TextView mobile = (TextView) findViewById(R.id.rider_mobile_number);
+                                mobile.setText(riderMobile);
+                                TextView time = (TextView) findViewById(R.id.rider_available_time);
+                                time.setText(riderTime);
+                                TextView price = (TextView) findViewById(R.id.rider_price);
+                                price.setText(riderPrice);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                }).execute(type, userMobile, originLatitude, originLongitude, destinationLatitude, destinationLongitude);
             }
 
             @Override
@@ -163,6 +201,31 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        //===============================================| Request to Rider
+        Button request = (Button) findViewById(R.id.send_request_button);
+        request.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                requestBox.setVisibility(View.GONE);
+                String type = "send_notification";
+                String title = "Request";
+                String message = "Can you take me?";
+                new UserAsyncTask(context, new UserAsyncTask.AsyncResponse() {
+                    @Override
+                    public void processFinish(String output) {
+                        Log.d(TAG, ""+output);
+                    }
+                }).execute(type, riderMobile, userName, userMobile, destinationLatitude, destinationLongitude, title, message);
+            }
+        });
+        Button close = (Button) findViewById(R.id.close);
+        close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                requestBox.setVisibility(View.GONE);
+            }
+        });
 
     }
 
@@ -396,10 +459,12 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public void onLocationChanged(Location location) {
         lastLocation = location;
-        Toast.makeText(this, "Change Location: "+location.getLatitude()+","+location.getLongitude(), Toast.LENGTH_SHORT).show();
+        Log.d(TAG,"Change Location: "+location.getLatitude()+","+location.getLongitude());
+        originLatitude = String.valueOf(location.getLatitude());
+        originLongitude = String.valueOf(location.getLongitude());
 
         if (location == null) {
-            Toast.makeText(this, "Location could not be found", Toast.LENGTH_SHORT).show();
+            Log.d(TAG,"Location could not be found");
         } else {
             originPlace.setText(location.getLatitude()+","+location.getLongitude());
             addMarker(location.getLatitude(),location.getLongitude(),"Current Location");
@@ -418,17 +483,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         currentLocationMarker = mMap.addMarker(new MarkerOptions().position(latLng));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
         mMap.animateCamera(CameraUpdateFactory.zoomTo(15));*/
-
-        String type = "update_rider_latlng";
-        new RiderAsyncTask(context, new RiderAsyncTask.AsyncResponse() {
-            @Override
-            public void processFinish(String output) {
-                Log.d(TAG, ""+output);
-                if (output.equals("Updated successfully")) {
-
-                }
-            }
-        }).execute(type, userMobile, String.valueOf(location.getLatitude()),String.valueOf(location.getLongitude()));
     }
 
     //===============================================| Add Marker and Move Map Camera
@@ -480,7 +534,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                         mMap.setMyLocationEnabled(true);
                     }
                 } else {
-                    Toast.makeText(this, "permission denied", Toast.LENGTH_LONG).show();
+                    Log.d(TAG,"permission denied");
                 }
                 return;
             }
@@ -492,7 +546,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         String origin = originPlace.getText().toString();
         String destination = destinationPlace.getText().toString();
         if (origin.isEmpty() && destination.isEmpty()) {
-            Toast.makeText(this, "Please enter origin address and destination address!", Toast.LENGTH_SHORT).show();
+            Log.d(TAG, "Please enter origin address and destination address!");
         } else {
             try {
                 new DirectionFinder(this, origin, destination).execute();
