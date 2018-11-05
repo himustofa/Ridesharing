@@ -28,8 +28,9 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="outputName" value="ic_close_black_24dp" />
-                            <entry key="sourceFile" value="C:\Users\Kamal" />
+                            <entry key="assetSourceType" value="FILE" />
+                            <entry key="outputName" value="ic_rider_logo" />
+                            <entry key="sourceFile" value="C:\Users\Kamal\Desktop\rider.svg" />
                           </map>
                         </option>
                       </PersistentState>
